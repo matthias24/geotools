@@ -17,6 +17,9 @@
 
 package org.geotools.data.complex.filter;
 
+import static org.geotools.data.complex.AbstractMappingFeatureIterator.MULTI_VALUE_TYPE;
+import static org.geotools.data.complex.AbstractMappingFeatureIterator.UNBOUNDED_MULTI_VALUE;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -459,7 +462,7 @@ public class XPath extends XPathUtil {
 
         Attribute leafAttribute = null;
         final Name attributeName = descriptor.getName();
-        if (!isXlinkRef) {
+        if (!isXlinkRef && !isUnboundedMultivalue(parent)) {
             // skip this process if the attribute would only contain xlink:ref
             // that is chained, because it won't contain any values, and we
             // want to create a new empty leaf attribute
@@ -468,8 +471,7 @@ public class XPath extends XPathUtil {
                 if (currStepValue instanceof Collection) {
                     List<Attribute> values = new ArrayList((Collection) currStepValue);
                     if (!values.isEmpty()) {
-                        if ((!(isUnboundedMultivalue(parent)) || !descriptor.isNillable())
-                                && isEmpty(convertedValue)) {
+                        if (isEmpty(convertedValue)) {
                             // when attribute is empty, it is probably just a parent of a leaf
                             // attribute
                             // it could already exist from another attribute mapping for a different
@@ -849,9 +851,9 @@ public class XPath extends XPathUtil {
     }
 
     private boolean isUnboundedMultivalue(final Attribute parent) {
-        final Object value = parent.getUserData().get("multi_value_type");
+        final Object value = parent.getUserData().get(MULTI_VALUE_TYPE);
         if (value instanceof String) {
-            return "unbounded-multi-value".equalsIgnoreCase((String) value);
+            return UNBOUNDED_MULTI_VALUE.equals((String) value);
         }
         return false;
     }

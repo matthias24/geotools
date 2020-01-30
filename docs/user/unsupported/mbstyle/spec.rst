@@ -1781,10 +1781,10 @@ width of the inner gap.
    * - basic functionality
      - >= 0.10.0
      - Not yet supported
-     - Not yet supported
+     - 18.0
    * - data-driven styling
      - >= 0.29.0
-     - Not yet supported
+     - 22.2
      - Not yet supported
 
 line-offset
@@ -1969,6 +1969,8 @@ If true, the symbols will not cross tile edges to avoid mutual
 collisions. Recommended in layers that don't have enough padding in the
 vector tile to prevent collisions, or if it is a point symbol layer
 placed after a line symbol layer.
+
+**In GeoTools the option is ignored and effectively always "on" when translating to SLD, to support server side rendering** 
 
 .. list-table::
    :widths: 19, 27, 27, 27
@@ -2670,11 +2672,11 @@ bottom-right
      - OpenLayers
    * - basic functionality
      - >= 0.10.0
-     - Not yet supported
+     - 23.0
      - >= 2.4.0
    * - data-driven styling
-     - Not yet supported
-     - Not yet supported
+     - >= 0.35.0
+     - >= 22.2
      - >= 2.4.0
 
 
@@ -2827,7 +2829,7 @@ lowercase
 text-offset
 """""""""""
 
-*Optional* :ref:`types-array`. *Units in* pixels. *Defaults to* 0,0. *Requires* icon-image.
+*Optional* :ref:`types-array`. *Units in* ems. *Defaults to* 0,0. *Requires* icon-image.
 
 Offset distance of text from its anchor. Positive values indicate right
 and down, while negative values indicate left and up.
@@ -2843,11 +2845,11 @@ and down, while negative values indicate left and up.
      - OpenLayers
    * - basic functionality
      - >= 0.10.0
-     - Not yet supported
+     - 22.2
      - >= 2.4.0
    * - data-driven styling
      - >= 0.35.0
-     - Not yet supported
+     - 22.2
      - >= 2.4.0
 
 text-allow-overlap
